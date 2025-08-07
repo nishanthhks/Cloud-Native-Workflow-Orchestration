@@ -1,0 +1,106 @@
+# ====================
+# General
+# ====================
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+*.orig
+*.lock
+*.pid
+
+# Ignore environment files
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# React build
+/build
+/dist
+
+# Express (backend) build
+/backend/dist
+/backend/build
+
+# Logs and pids (backend/frontend)
+**/logs
+**/*.log
+**/*.pid
+
+# Coverage reports
+coverage/
+*.lcov
+
+# OS/system files
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+.vscode/
+.idea/
+
+# ====================
+# Terraform
+# ====================
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+terraform.tfvars
+terraform.tfvars.json
+.plan
+
+# ====================
+# Kubernetes Manifests
+# ====================
+# Usually these are committed, but if dynamically generated:
+*.yaml.generated
+*.yml.generated
+
+# Helm files (if used)
+charts/
+*.tgz
+release.yaml
+values.override.yaml
+
+# ====================
+# Docker
+# ====================
+*.tar
+*.img
+*.container
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Docker build
+**/Dockerfile.*
+
+# ====================
+# Optional: Misc
+# ====================
+*.sqlite
+*.db
+*.pem
+*.crt
+*.key
+*.csr
+*.pub
+
+# Ignore backend uploads or user data
+**/uploads/
+**/storage/

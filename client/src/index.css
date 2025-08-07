@@ -1,0 +1,12 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Optional body styling */
+body {
+  background-color: #f9f9f9;
+  color: #333;
+}
