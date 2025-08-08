@@ -43,8 +43,8 @@ jobs:
       - name: Update Kubernetes manifests # using sed, bash specific syntax to replace image tags in Kubernetes manifests
         run: |
           # Use sed to replace the image tag in the deployment files
-          sed -i 's|image:.*server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/server:${{ github.sha }}|g' manifests/backend-deployment.yaml
-          sed -i 's|image:.*client:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/client:${{ github.sha }}|g' manifests/frontend-deployment.yaml
+          sed -i 's|image:.*server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/server:${{ github.sha }}|g' manifests/server-deployment.yaml
+          sed -i 's|image:.*client:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/client:${{ github.sha }}|g' manifests/client-deployment.yaml
 
       - name: Commit and push changes # Commit the updated manifests back to the repository
         uses: stefanzweifel/git-auto-commit-action@v4
