@@ -1,0 +1,55 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main ## Run workflow only pushed to 'main'
+    paths:
+      - "client/**" # only run if something in client/ changes
+      - "server/**" # or if something in server/ changes
+
+jobs:
+  build-and-push: # name of the job
+    runs-on: ubuntu-latest # use ubuntu VM runner
+    steps:
+      - name: Checkout repository # Pulls the code from the GitHub repo into the runner
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx # helps build multi-platform images, It only prepares the environment for building images
+        uses: docker/setup-buildx-action@v2 # runner have docker engine already installed
+
+      - name: Log in to Docker Hub # Authenticate with Docker Hub via secrets in cli
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./server # Path to the server directory
+          file: ./server/Dockerfile # Path to the Dockerfile for the server
+          push: true # Push the built image to Docker Hub
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/server:${{ github.sha }} # commit hash added as tag for uniqueness
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./client
+          file: ./client/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/client:${{ github.sha }}
+
+      - name: Update Kubernetes manifests # using sed to replace image tags in Kubernetes manifests
+        run: |
+          # Use sed to replace the image tag in the deployment files
+          sed -i 's|image:.*server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/server:${{ github.sha }}|g' manifests/backend-deployment.yaml
+          sed -i 's|image:.*client:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/client:${{ github.sha }}|g' manifests/frontend-deployment.yaml
+
+      - name: Commit and push changes # Commit the updated manifests back to the repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "CI: Update image tags to ${{ github.sha }}"
+          branch: main
+          file_pattern: "manifests/*.yaml"
+#  "github" is a namespace variable that contains information about the current workflow run
