@@ -17,9 +17,9 @@ function App() {
 
   return (
     <main className="container">
-      <h1>AWS EKS 2-Tier Deployment</h1>
+      <h1>Cloud-Native-Workflow-Orchestration Deployment</h1>
       <p><strong>Message:</strong> {message}</p>
-      <button onClick={fetchMessage}>Fetch from Backend</button>
+      <button onClick={fetchMessage}>Fetch from Server</button>
     </main>
   );
 }
