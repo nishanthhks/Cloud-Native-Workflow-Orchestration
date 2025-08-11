@@ -104,3 +104,6 @@ docker-compose.override.yaml
 # Ignore backend uploads or user data
 **/uploads/
 **/storage/
+
+*new-alb-policy.json
+*outputs.txt
