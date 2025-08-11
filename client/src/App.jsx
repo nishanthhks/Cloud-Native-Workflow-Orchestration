@@ -17,7 +17,7 @@ function App() {
 
   return (
     <main className="container">
-      <h1>Cloud-Native-Workflow-Orchestration Deployment Stage 1</h1>
+      <h1>Cloud-Native-Workflow-Orchestration Deployment Stage 2</h1>
       <p><strong>Message:</strong> {message}</p>
       <button onClick={fetchMessage}>Fetch from Server</button>
     </main>
