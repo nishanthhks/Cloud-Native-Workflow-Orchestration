@@ -5,6 +5,8 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0" 
 
+  # depends_on = [module.eks-vpc] # Creates VPC first
+
   # ----------------------------
   # Basic Cluster Info
   # ----------------------------
