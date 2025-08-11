@@ -16,6 +16,6 @@ spec:
       - name: client
         # IMPORTANT: Replace with your Docker Hub username
         # The 'latest' tag will be replaced by our CI/CD pipeline
-        image: nishanthhks/client:04914dd24ddc5e7dc96d0cb0724156723ae59153
+        image: nishanthhks/client:dc932ffd44f86cc5ee01d1988904c70d6b45761f
         ports:
         - containerPort: 80
