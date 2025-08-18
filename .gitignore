@@ -107,3 +107,5 @@ docker-compose.override.yaml
 
 *new-alb-policy.json
 *outputs.txt
+
+*server-secret.yaml

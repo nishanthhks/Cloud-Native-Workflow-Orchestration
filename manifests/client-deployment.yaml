@@ -1,21 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1 # which api version to use
+kind: Deployment # which kind of resource to create
 metadata:
-  name: client-deployment
+  name: client-deployment # name of the deployment
 spec:
-  replicas: 2
+  replicas: 2 # number of replicas to run
   selector:
     matchLabels:
-      app: client
+      app: client # Deployment will look for Pods with label "app=client"
   template:
     metadata:
       labels:
-        app: client
+        app: client # label for the Pods created by this Deployment
     spec:
       containers:
-      - name: client
-        # IMPORTANT: Replace with your Docker Hub username
-        # The 'latest' tag will be replaced by our CI/CD pipeline
+      - name: client # name of the container
         image: nishanthhks/client:dc932ffd44f86cc5ee01d1988904c70d6b45761f
         ports:
         - containerPort: 80

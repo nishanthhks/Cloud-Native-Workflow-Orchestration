@@ -3,10 +3,10 @@ kind: Ingress
 metadata:
   name: main-ingress
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing # means -> ALB gets public DNS
+    alb.ingress.kubernetes.io/target-type: ip # means -> ALB routes traffic to pods instead of node port
 spec:
-  ingressClassName: alb
+  ingressClassName: alb 
   rules:
     - http:
         paths:

@@ -22,5 +22,5 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 
-# Run Nginx in the foreground (as a daemon) to keep the container running
+# Run Nginx in foreground to serve the static files because it is the main process
 CMD ["nginx", "-g", "daemon off;"]

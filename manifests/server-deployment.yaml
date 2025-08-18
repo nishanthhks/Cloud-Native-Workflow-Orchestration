@@ -16,4 +16,15 @@ spec:
       - name: server
         image: nishanthhks/server:dc932ffd44f86cc5ee01d1988904c70d6b45761f
         ports:
-        - containerPort: 3001
+        - containerPort: 3000
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: server-secrets   # locate the Secret
+                key: JWT_SECRET
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: server-secrets
+                key: DATABASE_URL

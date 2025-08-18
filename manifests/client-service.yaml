@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: client-service
+  name: client-service # Service DNS name is "client-service", can be reached at client-service:80
 spec:
+  type: ClusterIP # default
   selector:
-    app: client
+    app: client # Service will route traffic to Pods with label "app=client"
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 80 # Port that the service will expose
+      targetPort: 80 # Port on the container to forward traffic to
