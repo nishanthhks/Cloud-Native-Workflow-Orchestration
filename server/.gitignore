@@ -1,0 +1,6 @@
+node_modules
+# Keep environment variables out of version control
+.env
+nishanth-url-shortner-firebase-adminsdk-fbsvc-20fc106460.json
+
+firebase.js

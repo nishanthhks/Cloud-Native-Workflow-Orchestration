@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import "./App.css";
+import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Layout from "./layouts/Layout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Analytics from "./pages/Analytics";
+import UserProvider from "./context/userContext";
+import ImagePage from "./pages/ImagePage";
+import Redirect from "./pages/Redirect";
 
 function App() {
-  const [message, setMessage] = useState('Click the button to fetch a message.');
-
-  const fetchMessage = async () => {
-    try {
-      const response = await axios.get('/api/message');
-      setMessage(response.data.message);
-    } catch (error) {
-      setMessage('Failed to fetch message from backend.');
-      console.error('Error fetching message:', error);
-    }
-  };
-
   return (
-    <main className="container">
-      <h1>Cloud-Native-Workflow-Orchestration Deployment Stage 2</h1>
-      <p><strong>Message:</strong> {message}</p>
-      <button onClick={fetchMessage}>Fetch from Server</button>
-    </main>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/dashboard/image" element={<ImagePage />} />
+          {/* <Route path="/redirect/:shortUrl" element={<Redirect />} />  */}
+          <Route path="/:shortUrl" element={<Redirect />} />
+
+          {/* Wrap the dashboard inside Layout correctly */}
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/analytics/:id" element={<Analytics />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

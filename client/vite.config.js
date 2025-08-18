@@ -1,18 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import path from "path"
 
-// https://vitejs.dev/config/
+
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  server: {
-    // This proxy is only for local development with `npm run dev`
-    // In Kubernetes, the Ingress will handle this routing.
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        secure: false,
-      },
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
   },
 })
