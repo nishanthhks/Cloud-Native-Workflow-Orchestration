@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/:shortUrl",
+      "destination": "https://cloud-native-workflow-orchestration.onrender.com/api/redirect/get-long-url/:shortUrl"
+    }
+  ]
+}
