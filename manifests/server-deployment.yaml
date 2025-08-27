@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: nishanthhks/server:1fd99f928f985e9db4dae8ade78633164651715c
+        image: nishanthhks/server:ed7836a97462d7a1bde79e19c4400ceed0128302
         ports:
         - containerPort: 3000
         env:
