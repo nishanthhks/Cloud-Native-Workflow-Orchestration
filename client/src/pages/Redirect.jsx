@@ -18,8 +18,10 @@ function Redirect() {
           setError(true);
           setLoading(false);
         }
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching original URL:", error);
+        console.log("Error fetching original URL:", error);
         setError(true);
         setLoading(false);
       }

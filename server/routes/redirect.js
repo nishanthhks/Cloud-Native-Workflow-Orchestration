@@ -24,7 +24,7 @@ router.get("/get-long-url/:shortUrl", async (req, res) => {
     });
 
     const OriginalUrl = urlData.OriginalUrl;
-    return res.redirect(OriginalUrl);
+    return res.send({ originalUrl: OriginalUrl });
 
     // use below when both frontend and backend domain are same
     // or use serverless function to redirect to original url
