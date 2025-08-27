@@ -34,7 +34,7 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
     try {
       setIsDeleting(true);
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/api/urls/deleteUrl/${_id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/urls/deleteUrl/${_id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       refreshLinks();

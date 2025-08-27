@@ -81,7 +81,7 @@ export function CreateLinkForm() {
       const qrBlob = await getQRCodeBlob();
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/api/urls/createUrl",
+        `${import.meta.env.VITE_API_URL}/urls/createUrl`,
         {
           title: values.title,
           longUrl: values.longUrl,

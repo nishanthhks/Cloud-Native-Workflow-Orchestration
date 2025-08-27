@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
 import urlsRouter from "./routes/urls.js";
-import imagesRouter from "./routes/upload.js";
 import redirectRouter from "./routes/redirect.js";
 
 const app = express();
@@ -11,7 +10,6 @@ app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/urls", urlsRouter);
-app.use("/api/uploads", imagesRouter);
 app.use("/api/redirect", redirectRouter);
 
 app.get("/", (req, res) => {

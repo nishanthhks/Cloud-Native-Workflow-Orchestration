@@ -18,7 +18,7 @@ const UserProvider = ({ children }) => {
         setLoading(true);
         try {
           const response = await axios.get(
-            "http://localhost:3000/api/auth/get-user-details",
+            `${import.meta.env.VITE_API_URL}/auth/get-user-details`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

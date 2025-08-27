@@ -11,7 +11,7 @@ function Redirect() {
   useEffect(() => {
     const fetchOriginalUrl = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/redirect/get-long-url/${shortUrl}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/redirect/get-long-url/${shortUrl}`);
         if (response.data.originalUrl) {
           window.location.href = response.data.originalUrl; // Client-side redirect
         } else {

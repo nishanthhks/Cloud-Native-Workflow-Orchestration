@@ -14,8 +14,7 @@ Thumbs.db
 
 # Ignore environment files
 .env
-.env.*
-!.env.example
+
 
 # Node.js
 node_modules/
@@ -109,3 +108,4 @@ docker-compose.override.yaml
 *outputs.txt
 
 *server-secret.yaml
+*client-secret.yaml

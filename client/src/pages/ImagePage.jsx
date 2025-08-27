@@ -21,7 +21,7 @@ function ImagePage() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/uploads/aws",
+        `${import.meta.env.VITE_API_URL}/api/uploads/aws`,
         formData,
         {
           headers: {
@@ -46,7 +46,7 @@ function ImagePage() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:3000/api/images/latest",
+        `${import.meta.env.VITE_API_URL}/images/latest`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

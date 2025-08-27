@@ -52,7 +52,7 @@ function Dashboard() {
           setIsLoading(true);
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            "http://localhost:3000/api/urls/getUrls",
+            `${import.meta.env.VITE_API_URL}/urls/getUrls`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

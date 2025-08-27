@@ -36,7 +36,7 @@ function LogIn() {
   async function onSubmit(values) {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${import.meta.env.VITE_API_URL}/auth/login`,
         values
       );
       if (response.status === 200) {
