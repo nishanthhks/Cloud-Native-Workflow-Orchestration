@@ -1,0 +1,7 @@
+nano alb-setup.sh
+nano argocd-monitoring-setup.sh
+
+chmod +x alb-setup.sh argocd-monitoring-setup.sh
+
+./alb-setup.sh
+./argocd-monitoring-setup.sh
