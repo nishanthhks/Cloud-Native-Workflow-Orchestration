@@ -1,0 +1,24 @@
+Outputs:
+
+eks_cluster_endpoint = "<EKS_CLUSTER_ENDPOINT>"
+eks_cluster_security_group_id = "<EKS_CLUSTER_SECURITY_GROUP_ID>"
+eks_node_security_group_id = "<EKS_NODE_SECURITY_GROUP_ID>"
+
+igw_id = "<INTERNET_GATEWAY_ID>"
+
+nat_gateway_ids = [
+  "<NAT_GATEWAY_ID_1>",
+  "<NAT_GATEWAY_ID_2>",
+]
+
+private_subnets = [
+  "<PRIVATE_SUBNET_ID_1>",
+  "<PRIVATE_SUBNET_ID_2>",
+]
+
+public_subnets = [
+  "<PUBLIC_SUBNET_ID_1>",
+  "<PUBLIC_SUBNET_ID_2>",
+]
+
+vpc_id = "<VPC_ID>"

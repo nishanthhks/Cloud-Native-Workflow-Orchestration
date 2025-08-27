@@ -59,7 +59,7 @@ function Home() {
             Shorten Your Links with <span className="text-blue-400">SWAPURL</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Create short, memorable links and QR codes for your URLs. Track clicks and analyze your audience.
+            Create short, memorable links and QR codes for your URLs.
           </p>
         </div>
 
@@ -84,15 +84,12 @@ function Home() {
         </div>
 
         {/* Features Section */}
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        <div className="grid md:grid-cols-2 gap-8 mt-20">
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-white mb-3">QR Code Generation</h3>
             <p className="text-gray-300">Generate QR codes for your shortened links instantly.</p>
           </div>
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-white mb-3">Link Analytics</h3>
-            <p className="text-gray-300">Track clicks and analyze your audience with detailed statistics.</p>
-          </div>
+          
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-white mb-3">Custom URLs</h3>
             <p className="text-gray-300">Create custom, branded short links for your business.</p>

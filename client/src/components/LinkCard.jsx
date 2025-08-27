@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Copy, Trash2 } from "lucide-react";
+import { Copy, Trash2, Check } from "lucide-react";
 import { QRCode } from "react-qrcode-logo";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,21 +21,30 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const { refreshLinks } = useUserState();
 
+  // Track which link was last copied
+  const [copied, setCopied] = useState(null);
+
   const handleAnalyze = () => {
     navigate(`/analytics/${_id}`);
   };
 
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(type);
+      setTimeout(() => setCopied(null), 2000); // reset after 2s
+    });
   };
 
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
       const token = localStorage.getItem("token");
-      await axios.delete(`${import.meta.env.VITE_API_URL}/urls/deleteUrl/${_id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/urls/deleteUrl/${_id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       refreshLinks();
     } catch (error) {
       console.error("Error deleting link:", error);
@@ -56,21 +64,19 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
       {/* QR Code & Analyze Button */}
       <div className="flex flex-col items-center justify-center p-2 bg-blue-900/20 rounded-md relative z-10 backdrop-blur-sm">
         <div>
-          <QRCode
-            value={longUrl}
-            size={100}
-            className="border border-blue-700"
-          />
+          <QRCode value={longUrl} size={100} className="border border-blue-700" />
         </div>
         <div className="flex gap-2 mt-2">
           <button
             onClick={handleAnalyze}
-            className="px-2 py-1 text-sm bg-blue-800 text-white rounded-md hover:bg-blue-700 transition-colors">
+            className="px-2 py-1 text-sm bg-blue-800 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
             Analyze
           </button>
           <button
             onClick={() => setIsDeleteDialogOpen(true)}
-            className="px-2 py-1 text-sm bg-red-800 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1">
+            className="px-2 py-1 text-sm bg-red-800 text-white rounded-md hover:bg-red-700 transition-colors flex items-center gap-1"
+          >
             <Trash2 className="h-4 w-4" />
             Delete
           </button>
@@ -81,27 +87,42 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
       <div className="w-full flex flex-col justify-center p-3 bg-black/25 rounded-md relative z-10 backdrop-blur-sm">
         <h2 className="text-lg font-semibold text-white">{title}</h2>
 
+        {/* Long URL */}
         <div className="flex items-center gap-2 group">
-          <button onClick={() => handleCopy(longUrl)}>
-            <Copy className="h-4 w-4 text-blue-300" />
+          <button onClick={() => handleCopy(longUrl, "long")}>
+            {copied === "long" ? (
+              <Check className="h-4 w-4 text-green-400" />
+            ) : (
+              <Copy className="h-4 w-4 text-blue-300" />
+            )}
           </button>
           <p className="text-sm text-blue-200 truncate flex-1">
             Long: {longUrl}
           </p>
         </div>
 
+        {/* Short URL */}
         <div className="flex items-center gap-2 group">
-          <button onClick={() => handleCopy(ShortUrl)}>
-            <Copy className="h-4 w-4 text-blue-300" />
+          <button onClick={() => handleCopy(ShortUrl, "short")}>
+            {copied === "short" ? (
+              <Check className="h-4 w-4 text-green-400" />
+            ) : (
+              <Copy className="h-4 w-4 text-blue-300" />
+            )}
           </button>
           <p className="text-sm text-blue-200 truncate flex-1">
             Short: {ShortUrl}
           </p>
         </div>
 
+        {/* Custom URL */}
         <div className="flex items-center gap-2 group">
-          <button onClick={() => handleCopy(CustomeUrl)}>
-            <Copy className="h-4 w-4 text-blue-300" />
+          <button onClick={() => handleCopy(CustomeUrl, "custom")}>
+            {copied === "custom" ? (
+              <Check className="h-4 w-4 text-green-400" />
+            ) : (
+              <Copy className="h-4 w-4 text-blue-300" />
+            )}
           </button>
           <p className="text-sm text-blue-200 truncate flex-1">
             Custom: {CustomeUrl}
@@ -110,14 +131,10 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
       </div>
 
       {/* Delete Confirmation Dialog */}
-      <AlertDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}>
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent className="bg-gradient-to-br from-black/5 via-blue-800/20 to-blue-950 border border-white/3">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-white">
-              Delete Link
-            </AlertDialogTitle>
+            <AlertDialogTitle className="text-white">Delete Link</AlertDialogTitle>
             <AlertDialogDescription className="text-white/70">
               Are you sure you want to delete this link? This action cannot be
               undone.
@@ -130,7 +147,8 @@ function LinkCard({ qr, title, longUrl, ShortUrl, CustomeUrl, _id }) {
             <AlertDialogAction
               onClick={handleDelete}
               disabled={isDeleting}
-              className="bg-gradient-to-r from-red-800 to-red-950 hover:from-red-700 hover:to-red-900 text-white">
+              className="bg-gradient-to-r from-red-800 to-red-950 hover:from-red-700 hover:to-red-900 text-white"
+            >
               {isDeleting ? "Deleting..." : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>

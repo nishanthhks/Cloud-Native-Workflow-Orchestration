@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LinkCard from "@/components/LinkCard";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { LogOut, LogOutIcon, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { CreateLinkForm } from "@/components/CreateLinkForm";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -14,7 +14,7 @@ const dummyLinks = [
     qr: "https://via.placeholder.com/150",
     title: "Google",
     longUrl: "https://www.google.com",
-    ShortUrl: "https://swap.nishanthks.me/g123",
+    ShortUrl: " https://swap.nishanthks.me/g123",
     CustomeUrl: "https://swap.nishanthks.me/my-google",
   },
   {
@@ -82,14 +82,15 @@ function Dashboard() {
         <div className="relative p-6 rounded-lg bg-gradient-to-br from-black/5 via-blue-800/20 to-blue-950 border border-white/3">
           <div className="relative z-10 flex flex-col gap-4">
             <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-bold text-white">
-                Welcome, {user?.username || "User"}
-                Email, {user?.email}
+              <h1 className="font-bold text-white">
+                Welcome: {user?.username || "User"}
+                <br />
+                Email: {user?.email}
               </h1>
               <Button
                 onClick={handleLogout}
                 className="bg-gradient-to-r from-red-800 to-red-950 hover:from-red-700 hover:to-red-900 text-white">
-                Logout
+                <LogOutIcon />
               </Button>
             </div>
 
@@ -117,10 +118,10 @@ function Dashboard() {
                 qr={link.qr_link}
                 title={link.title}
                 longUrl={link.OriginalUrl}
-                ShortUrl={`https://swap.nishanthks.me/${link.shortUrl}`}
+                ShortUrl={`${import.meta.env.VITE_DOMAIN}/${link.shortUrl}`}
                 CustomeUrl={
                   link.customUrl
-                    ? `https://swap.nishanthks.me/${link.customUrl}`
+                    ? `${import.meta.env.VITE_DOMAIN}/${link.customUrl}`
                     : "None"
                 }
                 _id={link.id}
