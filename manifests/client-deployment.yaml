@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: client # name of the container
-        image: nishanthhks/client:e383d6356767e3cab1de68d995de3b82cb2f3407
+        image: nishanthhks/client:eaca115ff7dcac6ee8d29081a9960cc7229c8cce
         ports:
         - containerPort: 80
